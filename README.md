@@ -5,7 +5,7 @@
 
 ## 📁 Sobre o Projeto
 
-Projeto com intuito de praticar meus conhecimento em JavaScript, Todo List.
+Projeto com intuito de praticar meus conhecimento em JavaScript, Todo - List.
 
 ##
 
