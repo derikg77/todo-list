@@ -1,6 +1,5 @@
 # Todo - List
 <div align="center" id="top">
-  <img src="./img/slider.png" alt="Slider"/>
 
 </div>
 
