@@ -2,40 +2,51 @@ const input = document.getElementById("input-text");
 const btnInsert = document.getElementById('button');
 const ul = document.querySelector("ul");
 
-let itensDB = [];
+itens = [];
 
-input.addEventListener("keypress", e => {
-    if (e.key == 'Enter' && input.value != '') {
+input.addEventListener('keypress' , (e) => {
+    if(e.key == 'Enter' && input.value != '' ){
         setItem();
     }
 })
-
-btnInsert.addEventListener("click", () => {
-    if (input.value != '') {
-        setItem();
-    }
+btnInsert.addEventListener('click', () => {
+    setItem();
 })
 
 function setItem() {
-        itensDB.push({ 'item': input.value, 'status': '' });
+    if (itens.lenght >= 5) {
+        return;
+    }
+    itens.push({'item': input.value, 'status': ''});
+    updateValue();
 }
-
-function loadItem() {
-
-    itensDB.forEach(() => {
-        createItem(item.item, item.status, i);
-        
-    })
+function updateValue() {
+    ul.innerHTML ='';
+    itens.forEach((item,i) => {
+        criarItem(item.item,item.status,i)
+    });
 }
-function createItem(item, status, i) {
+function criarItem(item,status,i) {
     const li = document.createElement('li');
-    li.classList.add('item');
     li.innerHTML = `
-     <li> <input type="checkbox" data-id=${status} data-i${i}><span>${item}</span>
-    <i id="remove" class="ri-delete-bin-line" data-i${i}></i>
-    </li> 
+     <li class="item" data-id=${status} data-i=${i}> <input onclick="checkbox(this,${i});" type="checkbox" ${status}><span>${item}</span>
+    <button onclick="removerItem(${i})"><i class="ri-delete-bin-line"></i></button>
+</li>
     `
     ul.appendChild(li);
+    input.value = '';
+}
+function checkbox(check,i) {
+   if(check.checked) {
+    itens[i].status = 'checked';
+   } else {
+    itens[i].status = '';
+   }
+   updateValue();
 }
 
-loadItem();
+function removerItem(i) {
+    itens.splice(i,1);
+    updateValue();
+}
+updateValue();
